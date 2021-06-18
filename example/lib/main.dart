@@ -15,14 +15,14 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key? key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return new Scaffold(
-      appBar: new AppBar(title: new Text(title)),
+      appBar: new AppBar(title: new Text(title!)),
       body: new Column(
         children: <Widget>[
           new Container(
@@ -37,7 +37,7 @@ class MyHomePage extends StatelessWidget {
             constraints: const BoxConstraints(maxHeight: 200.0),
             child: new ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemBuilder: _buildHorizontalChild,
+              itemBuilder: _buildHorizontalChild as Widget Function(BuildContext, int),
             ),
           ),
           new Container(
@@ -49,7 +49,7 @@ class MyHomePage extends StatelessWidget {
           ),
           new Expanded(
             child: new ListView.builder(
-              itemBuilder: _buildVerticalChild,
+              itemBuilder: _buildVerticalChild as Widget Function(BuildContext, int),
             ),
           )
         ],
@@ -57,7 +57,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildVerticalChild(BuildContext context, int index) {
+  Widget? _buildVerticalChild(BuildContext context, int index) {
     index++;
     if (index > 7) return null;
     return new Padding(
@@ -76,7 +76,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildHorizontalChild(BuildContext context, int index) {
+  Widget? _buildHorizontalChild(BuildContext context, int index) {
     index++;
     if (index > 7) return null;
     return new Padding(
